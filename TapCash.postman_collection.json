@@ -1,0 +1,1136 @@
+{
+	"info": {
+		"_postman_id": "c17ffaa9-5cb7-4a44-a3b5-468268c3f516",
+		"name": "TapCash",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16644298"
+	},
+	"item": [
+		{
+			"name": "sms-verification",
+			"item": [
+				{
+					"name": "SendVerificationCodeSuccessfully",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verification Message Sent Successfully\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Verification message has been sent successfully\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"phone_number\":\"01009923040\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://tabcash.vercel.app/messaging/sms-verification",
+							"protocol": "https",
+							"host": [
+								"tabcash",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"messaging",
+								"sms-verification"
+							],
+							"query": [
+								{
+									"key": "phone_number",
+									"value": "01009923040",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SendVC_invalid_phoneNumber",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 500\", function () {\r",
+									"    pm.response.to.have.status(500);\r",
+									"});\r",
+									"pm.test(\"Verification Message\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Error in number pattern\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"phone_number\":\"1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/messaging/sms-verification",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"messaging",
+								"sms-verification"
+							],
+							"query": [
+								{
+									"key": "phone_number",
+									"value": "01009923040",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SendVC_Empty_phoneNumber",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 500\", function () {\r",
+									"    pm.response.to.have.status(500);\r",
+									"});\r",
+									"pm.test(\"Verification Message\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Missing data\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"phone_number\":\"01519534671\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://tabcash.vercel.app/messaging/sms-verification",
+							"protocol": "https",
+							"host": [
+								"tabcash",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"messaging",
+								"sms-verification"
+							],
+							"query": [
+								{
+									"key": "phone_number",
+									"value": "01009923040",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SendVC_NonExistent_phoneNumber",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 500\", function () {\r",
+									"    pm.response.to.have.status(500);\r",
+									"});\r",
+									"pm.test(\"Verification Message\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Missing data\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"phone_number\":\"01519534671\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://tabcash.vercel.app/messaging/sms-verification",
+							"protocol": "https",
+							"host": [
+								"tabcash",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"messaging",
+								"sms-verification"
+							],
+							"query": [
+								{
+									"key": "phone_number",
+									"value": "01009923040",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Register testcases",
+			"item": [
+				{
+					"name": "Register_with_validData",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"User registered successfully\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"successfully registered\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "first_name",
+									"value": "ahmed",
+									"type": "text"
+								},
+								{
+									"key": "last_name",
+									"value": "mohamed",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "Kh12345678*",
+									"type": "text"
+								},
+								{
+									"key": "national_ID",
+									"value": "30002121403673",
+									"type": "text"
+								},
+								{
+									"key": "expiration_date",
+									"value": "2024-05-10",
+									"type": "text"
+								},
+								{
+									"key": "date_of_birth",
+									"value": "1998-12-27",
+									"type": "text"
+								},
+								{
+									"key": "validation_code",
+									"value": "140820",
+									"type": "text"
+								},
+								{
+									"key": "phone_number",
+									"value": "01009923040",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://tabcash.vercel.app/authentications/signup",
+							"protocol": "https",
+							"host": [
+								"tabcash",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"authentications",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "RegisterWithMissingData",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 500\", function () {\r",
+									"    pm.response.to.have.status(500);\r",
+									"});\r",
+									"pm.test(\"Error Message( missing data)\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Missing data\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "first_name",
+									"value": "ahmed",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "last_name",
+									"value": "mohamed",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "123456hH@7895",
+									"type": "text"
+								},
+								{
+									"key": "national_ID",
+									"value": "30002121403673",
+									"type": "text"
+								},
+								{
+									"key": "expiration_date",
+									"value": "2024-05-10",
+									"type": "text"
+								},
+								{
+									"key": "date_of_birth",
+									"value": "1998-12-27",
+									"type": "text"
+								},
+								{
+									"key": "validation_code",
+									"value": "342682",
+									"type": "text"
+								},
+								{
+									"key": "phone_number",
+									"value": "01009923040",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://tabcash.vercel.app/authentications/signup",
+							"protocol": "https",
+							"host": [
+								"tabcash",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"authentications",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "RegisterWithRegistered_PhoneNumber",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 500\", function () {\r",
+									"    pm.response.to.have.status(500);\r",
+									"});\r",
+									"pm.test(\"Error Message\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "first_name",
+									"value": "ahmed",
+									"type": "text"
+								},
+								{
+									"key": "last_name",
+									"value": "mohamed",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "123456hH@7895",
+									"type": "text"
+								},
+								{
+									"key": "national_ID",
+									"value": "30002121403673",
+									"type": "text"
+								},
+								{
+									"key": "expiration_date",
+									"value": "2024-05-10",
+									"type": "text"
+								},
+								{
+									"key": "date_of_birth",
+									"value": "1998-12-27",
+									"type": "text"
+								},
+								{
+									"key": "validation_code",
+									"value": "036009",
+									"type": "text"
+								},
+								{
+									"key": "phone_number",
+									"value": "01153300178",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://tabcash.vercel.app/authentications/signup",
+							"protocol": "https",
+							"host": [
+								"tabcash",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"authentications",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "RegisterWith_InvalidData",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 500\", function () {\r",
+									"    pm.response.to.have.status(500);\r",
+									"});\r",
+									"pm.test(\"Error Message\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Check the imposed patterns\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "first_name",
+									"value": "ahmed",
+									"type": "text"
+								},
+								{
+									"key": "last_name",
+									"value": "mohamed",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "123456hH",
+									"type": "text"
+								},
+								{
+									"key": "national_ID",
+									"value": "30002121403673",
+									"type": "text"
+								},
+								{
+									"key": "expiration_date",
+									"value": "2024-05-10",
+									"type": "text"
+								},
+								{
+									"key": "date_of_birth",
+									"value": "1998-12-27",
+									"type": "text"
+								},
+								{
+									"key": "validation_code",
+									"value": "036009",
+									"type": "text"
+								},
+								{
+									"key": "phone_number",
+									"value": "01153300178",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}signup",
+							"host": [
+								"{{url}}signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "RegisterWithAlreadyAssociateNational_ID",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "first_name",
+									"value": "ahmed",
+									"type": "text"
+								},
+								{
+									"key": "last_name",
+									"value": "mohamed",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "123456hH@7895",
+									"type": "text"
+								},
+								{
+									"key": "national_ID",
+									"value": "30002121403673",
+									"type": "text"
+								},
+								{
+									"key": "expiration_date",
+									"value": "2024-05-10",
+									"type": "text"
+								},
+								{
+									"key": "date_of_birth",
+									"value": "1998-12-27",
+									"type": "text"
+								},
+								{
+									"key": "validation_code",
+									"value": "140820",
+									"type": "text"
+								},
+								{
+									"key": "phone_number",
+									"value": "01009923040",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://tabcash.vercel.app/authentications/signup",
+							"protocol": "https",
+							"host": [
+								"tabcash",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"authentications",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Login",
+			"item": [
+				{
+					"name": "LoginWith_UnregisteredUser",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 500\", function () {\r",
+									"    pm.response.to.have.status(500);\r",
+									"});\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"var succMessage = jsonData.masseage;\r",
+									"pm.environment.set(\"SuccessMessage\", succMessage);\r",
+									"\r",
+									"pm.test(\"Login with Unregistered user\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Unregistered user\");\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "phone_number",
+									"value": "01112018504",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "Kh12345678*",
+									"type": "text"
+								},
+								{
+									"key": "validation_code",
+									"value": "140820",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://tabcash.vercel.app/authentications/signin",
+							"protocol": "https",
+							"host": [
+								"tabcash",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"authentications",
+								"signin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "LoginSuccessfully",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"var succMessage = jsonData.masseage;\r",
+									"pm.environment.set(\"SuccessMessage\", succMessage);\r",
+									"\r",
+									"pm.test(\"User Login successfully\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"successfully\");\r",
+									"});\r",
+									"\r",
+									"// token \r",
+									"var jsonData = pm.response.json();\r",
+									"var token = jsonData.masseage;\r",
+									"pm.environment.set(\"Token\",token);\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "phone_number",
+									"value": "01009923040",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "Kh12345678*",
+									"type": "text"
+								},
+								{
+									"key": "validation_code",
+									"value": "140820",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://tabcash.vercel.app/authentications/signin",
+							"protocol": "https",
+							"host": [
+								"tabcash",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"authentications",
+								"signin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "LoginWith_An_InvalidPassword",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 500\", function () {\r",
+									"    pm.response.to.have.status(500);\r",
+									"});\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"var Message = jsonData.masseage;\r",
+									"pm.environment.set(\"SuccessMessage\", Message);\r",
+									"\r",
+									"pm.test(\"Login with an invalidPassword\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Please check the information\");\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "phone_number",
+									"value": "01153300178",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "Kh12348*",
+									"type": "text"
+								},
+								{
+									"key": "validation_code",
+									"value": "123456",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://tabcash.vercel.app/authentications/signin",
+							"protocol": "https",
+							"host": [
+								"tabcash",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"authentications",
+								"signin"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Transfer",
+			"item": [
+				{
+					"name": "Transfer_Successfully",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ3YWxsZXQiOiIwMTAwOTkyMzA0MCIsImlhdCI6MTY4MzU3NDY4NywiZXhwIjoxNjg3MTc0Njg3fQ.wIzePiVAqUXIbpIqzelC0wFJTGb-jJaK_eVdvY9dVFY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "amount",
+									"value": "500",
+									"type": "text"
+								},
+								{
+									"key": "receiver",
+									"value": "01009031919",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "123456hH@7895",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://trojena.oa.r.appspot.com/transfer/to-wallet",
+							"protocol": "https",
+							"host": [
+								"trojena",
+								"oa",
+								"r",
+								"appspot",
+								"com"
+							],
+							"path": [
+								"transfer",
+								"to-wallet"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Transfer_Invalid Credentials",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ3YWxsZXQiOiIwMTAwOTkyMzA0MCIsImlhdCI6MTY4MzUzODg2MywiZXhwIjoxNjg3MTM4ODYzfQ.WRdYQlB44cbgGHOMq0paZAraG3vxrFjizX5kVsWBkAw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "amount",
+									"value": "500",
+									"type": "text"
+								},
+								{
+									"key": "receiver",
+									"value": "01009031919",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "invalid",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://trojena.oa.r.appspot.com/transfer/to-wallet",
+							"protocol": "https",
+							"host": [
+								"trojena",
+								"oa",
+								"r",
+								"appspot",
+								"com"
+							],
+							"path": [
+								"transfer",
+								"to-wallet"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Transfer_Invalid Receiver number",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ3YWxsZXQiOiIwMTAwOTkyMzA0MCIsImlhdCI6MTY4MzUzODg2MywiZXhwIjoxNjg3MTM4ODYzfQ.WRdYQlB44cbgGHOMq0paZAraG3vxrFjizX5kVsWBkAw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "amount",
+									"value": "500",
+									"type": "text"
+								},
+								{
+									"key": "receiver",
+									"value": "1234",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "Kh12345678*",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://trojena.oa.r.appspot.com/transfer/to-wallet",
+							"protocol": "https",
+							"host": [
+								"trojena",
+								"oa",
+								"r",
+								"appspot",
+								"com"
+							],
+							"path": [
+								"transfer",
+								"to-wallet"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Withdraw",
+			"item": [
+				{
+					"name": "New Request",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "amount",
+									"value": "100",
+									"type": "text"
+								},
+								{
+									"key": "bank_account_number",
+									"value": "12345678900000",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "Kh12345678*",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://tabcash.vercel.app/transactions/withdrawal",
+							"protocol": "https",
+							"host": [
+								"tabcash",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"transactions",
+								"withdrawal"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Childs/create",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ3YWxsZXQiOiIwMTAwOTkyMzA0MCIsImlhdCI6MTY4MzU3NDY4NywiZXhwIjoxNjg3MTc0Njg3fQ.wIzePiVAqUXIbpIqzelC0wFJTGb-jJaK_eVdvY9dVFY",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ3YWxsZXQiOiIwMTAwOTkyMzA0MCIsImlhdCI6MTY4MzUzODg2MywiZXhwIjoxNjg3MTM4ODYzfQ.WRdYQlB44cbgGHOMq0paZAraG3vxrFjizX5kVsWBkAw",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "first_name",
+							"value": "ahmed",
+							"type": "text"
+						},
+						{
+							"key": "last_name",
+							"value": "mohamed",
+							"type": "text"
+						},
+						{
+							"key": "phone_number",
+							"value": "01009923040",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "Kh12345678*",
+							"type": "text"
+						},
+						{
+							"key": "age",
+							"value": "15",
+							"type": "text"
+						},
+						{
+							"key": "type",
+							"value": "daily",
+							"type": "text"
+						},
+						{
+							"key": "expense",
+							"value": "200",
+							"type": "text"
+						},
+						{
+							"key": "category",
+							"value": "['Toys','Books']",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://tabcash.vercel.app/childs/create",
+					"protocol": "https",
+					"host": [
+						"tabcash",
+						"vercel",
+						"app"
+					],
+					"path": [
+						"childs",
+						"create"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
